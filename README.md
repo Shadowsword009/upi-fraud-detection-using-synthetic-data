@@ -1,135 +1,90 @@
-# 💳 UPI Fraud Detection using Machine Learning
+# 💳 UPI Fraud Detection using Synthetic Behavioral Data
 
-## 🔍 Overview
+## 📌 Overview
+This project builds a **machine learning-based fraud detection system** for UPI transactions using **synthetic but behaviorally realistic data**.
 
-Digital payments are growing rapidly, and so is fraud. This project demonstrates how machine learning can be used to **identify suspicious UPI transactions** using a **Random Forest Classifier** trained on **synthetically generated data**.
-
-Since real financial datasets are highly restricted, this project simulates realistic transaction patterns using the `Faker` library—making it a practical prototype for fraud detection systems.
-
----
-
-## ⚙️ Key Features
-
-* 🔐 Detects **fraudulent vs legitimate transactions**
-* 🧪 Generates **realistic synthetic UPI data**
-* 🧠 Uses **Random Forest Classifier** for prediction
-* 🔄 Handles categorical data with **One-Hot Encoding**
-* 📊 Provides **accuracy, precision, recall, and F1-score**
-* 👀 Shows **sample predictions** for validation
+Instead of relying on simple rule-based signals, the system incorporates **user behavior patterns** such as transaction deviation, device changes, and transaction velocity to simulate real-world fraud scenarios.
 
 ---
 
-## 🧰 Tech Stack
-
-* **Python**
-* **Pandas** – Data handling
-* **NumPy** – Numerical computation
-* **Faker** – Synthetic data generation
-* **Scikit-learn** – ML model & evaluation
-
----
-
-## 📂 Dataset Details
-
-This project uses synthetic data to mimic real-world UPI transactions:
-
-| Feature             | Description                            |
-| ------------------- | -------------------------------------- |
-| 💰 Amount           | Transaction value (INR)                |
-| 🕒 TimeOfDay        | Morning / Afternoon / Evening / Night  |
-| 🏦 SenderBank       | Randomly generated bank names          |
-| 🏦 ReceiverBank     | Randomly generated bank names          |
-| 📍 SenderLocation   | Random city                            |
-| 📍 ReceiverLocation | Random city                            |
-| 🚨 Fraud            | 0 = Legit, 1 = Fraud (~10% fraud rate) |
+## 🚀 Key Highlights
+- Detects **Fraud (1)** vs **Legit (0)** transactions
+- Uses **behavioral features** (not just static rules)
+- Implements **Random Forest Classifier** for robust tabular learning
+- Optimizes decision threshold using **Precision–Recall trade-off**
+- Demonstrates real-world ML concept:  
+  👉 *High recall vs precision trade-off in fraud detection*
 
 ---
 
-## 🧠 Model
+## 🧠 Features Used
 
-### Random Forest Classifier
+### 🔹 Transaction Features
+- Amount
+- Time (encoded using sine/cosine transformation)
+- Transaction Type
+- Location
+- Device
 
-* Handles both **categorical and numerical features**
-* Robust against overfitting
-* Performs well on structured/tabular data
+### 🔹 Behavioral Features (Core Strength)
+- **RelAmount** → deviation from user's normal spending
+- **DeviceChange** → new device usage
+- **LocationChange** → unusual location
+- **Velocity** → number of recent transactions
+
+---
+
+## 🛠 Tech Stack
+- Python 🐍  
+- Pandas  
+- NumPy  
+- Scikit-learn  
+
+---
+
+## 📂 Dataset
+- Fully **synthetic dataset (~15,000 transactions)**
+- Fraud rate: **~10% (realistic distribution)**
+- Designed to simulate:
+  - high-risk behavior patterns  
+  - normal user activity  
+  - probabilistic fraud occurrence  
+
+---
+
+## 🤖 Model
+- **Random Forest Classifier**
+- Handles mixed feature types and non-linear patterns effectively
+- Uses **class balancing** for imbalanced fraud detection
 
 ---
 
 ## 📈 Results
 
-* ✅ Accuracy: ~90% *(varies due to randomness)*
-* 📊 Includes classification metrics:
+| Metric | Value |
+|------|------|
+| Precision | ~0.25 |
+| Recall | ~0.54 |
+| Accuracy | ~0.85 |
 
-  * Precision
-  * Recall
-  * F1-score
+### 🔍 Interpretation
+- High recall ensures most fraud cases are detected  
+- Moderate precision reflects realistic false-positive trade-offs  
 
 ---
 
-## 🚀 Getting Started
+## ⚖️ Key Insight
+Fraud detection is not about maximizing accuracy.
 
-### 1️⃣ Clone the Repository
+This project demonstrates:
+> **“Balancing fraud detection (recall) and user experience (precision)”**
+
+---
+
+## ▶️ How to Run
 
 ```bash
-git clone https://github.com/your-username/upi-fraud-detection-using-synthetic-data.git
-cd upi-fraud-detection-using-synthetic-data
-```
-
-### 2️⃣ Install Dependencies
-
-```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 pip install -r requirements.txt
-```
-
-### 3️⃣ Run the Project
-
-```bash
-python main.py
-```
-
----
-
-## 📊 Sample Output
-
-```
-Transaction: ₹4500 | Evening | Mumbai → Delhi
-Prediction: Legit (0)
-
-Transaction: ₹98000 | Night | Unknown → Unknown
-Prediction: Fraud (1)
-```
-
----
-
-## ⚠️ Limitations
-
-* Synthetic data may not fully capture real-world fraud patterns
-* Model performance may vary across runs
-* Not production-ready without real transaction data
-
----
-
-## 🔮 Future Improvements
-
-* 🔍 Use **real-world anonymized datasets**
-* ⚡ Try advanced models (XGBoost, Neural Networks)
-* 🌐 Build a **web dashboard for real-time detection**
-* 📉 Handle **class imbalance more effectively (SMOTE, etc.)**
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome. If you have ideas for improvement, feel free to fork and contribute!
-
----
-
-## 📜 License
-
-This project is open-source and available under the MIT License.
-
----
-
-## ⭐ Support
-
-If you found this useful, consider giving it a ⭐ on GitHub!
+jupyter notebook
